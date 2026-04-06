@@ -1,0 +1,38 @@
+---
+description: Reduce extraneous cognitive load (zakirullin/cognitive-load) when writing or changing code
+alwaysApply: true
+---
+
+# Cognitive load (project ruleset)
+
+Source: [zakirullin/cognitive-load](https://github.com/zakirullin/cognitive-load). **Goal:** minimize *extraneous* load—how much a reader must hold in working memory to finish a task. Intrinsic difficulty stays; presentation and structure should not add noise.
+
+## Reading flow
+
+- Prefer **early returns** over deep nesting so the happy path stays linear and preconditions drop out of mind.
+- Replace **complex boolean expressions** with well-named locals (e.g. `isValid`, `isAllowed`) so readers do not re-parse conditions.
+- Use **plain words** in names and messages (e.g. “login” / “permissions”) when they reduce ambiguity vs jargon.
+
+## Modules and boundaries
+
+- Prefer **fewer, deeper modules**: simple interface, most complexity hidden inside (information hiding). Avoid many **shallow** types/files that force hop-scotching to understand one behavior.
+- **Single responsibility** in the stakeholder sense: a change that breaks two unrelated business concerns is a smell—not “one tiny class per verb.”
+- Split services or packages only when there is a **justified extension or deployment** need; defer premature network boundaries that create distributed monoliths.
+
+## Abstractions and reuse
+
+- **Do not add layers** “for architecture.” Add indirection only for a concrete extension point or test seam you need.
+- **DRY:** avoid deduplication that couples unrelated areas or forces premature shared abstractions; **a little copying beats a wrong dependency** (and every dependency is code you must debug).
+- Keep **core/domain logic** callable without mastering framework magic; use frameworks at the edges.
+
+## Errors and contracts
+
+- Prefer **self-describing values** (e.g. string codes in response bodies) over opaque numeric enums that every client must memorize. Use transport codes (HTTP, etc.) in conventional ways; do not overload them with bespoke business meanings.
+
+## Language and stack
+
+- **Limit optional language features** and clever idioms; favor boring, consistent patterns so return visits do not require reconstructing the author’s feature tour.
+
+## Review bar
+
+- If a newcomer would stay confused for a long stretch while tracing the change, **simplify structure or naming first** before merging.
