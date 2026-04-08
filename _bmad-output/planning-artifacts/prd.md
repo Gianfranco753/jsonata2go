@@ -28,6 +28,7 @@ classification:
   domain: general
   complexity: medium
   projectContext: greenfield
+date: 2026-04-07
 ---
 
 # Product Requirements Document - jsonata2go
@@ -205,7 +206,7 @@ Classification: **developer tool**, **general** domain, **medium** engineering c
 
 | Area | What these journeys require |
 |------|-----------------------------|
-| **Authoring & DX** | Clear **`go generate`** path, **type-binding convention**, **docs** and **examples**, **fast** regen loop; **cold-start** path to **first green** build (**time-to-first-green** TBD, measurable). |
+| **Authoring & DX** | Clear **`go generate`** path, **type-binding convention**, **docs** and **examples**, **repeatable** regen loop; **cold-start** path to **first green** build (**time-to-first-green** TBD, measurable). |
 | **Docs & trust** | **Documented** invocation matches **CI** and **golden / reference examples** (flags, paths, layout). |
 | **Errors & policy** | **Actionable** codegen errors; **no** silent eval; **documented** unsupported set for MVP. |
 | **Quality & CI** | **P0** suite, **deterministic** jobs, **generated-code** checks, **merge** policy; **semver/changelog** expectations when **generated** APIs change. |
@@ -261,7 +262,7 @@ Classification: **developer tool**, **general** domain, **medium** engineering c
 
 ### language_matrix
 
-- **Go:** Publish a **supported Go version range** for the **generator** and for **generated code** (policies may start unified and split later). State a **minimum Go** for each once the implementation relies on **generics** or other version-gated features; align **`go.mod`** **`toolchain`** with **CI** images.
+- **Go:** Publish a **supported Go version range** for the **generator** and for **generated code** (policies may start unified and split later). State a **minimum Go** for each once the implementation relies on **generics** or other version-gated features; align **module and toolchain** policy with **CI** images.
 - **JSONata:** MVP ships against **one pinned JSONata language version** on the **compatibility matrix**; **multi-version** is **post-MVP** unless explicitly pulled forward.
 
 ### installation_methods
@@ -436,7 +437,7 @@ Classification: **developer tool**, **general** domain, **medium** engineering c
 
 ### Integration
 
-- **NFR-I1 (Go toolchain compatibility):** The generator and **documented** workflows run on a **published** **supported Go** range aligned with **`go.mod` / `toolchain`** policy (**minimum** versions **TBD**).
+- **NFR-I1 (Go toolchain compatibility):** The generator and **documented** workflows run on a **published** **supported Go** range aligned with the repo’s **documented module and toolchain policy** (**minimum** versions **TBD**).
 - **NFR-I2 (CI determinism & operability):** **P0** jobs produce **deterministic** results under **documented** CI constraints (caching rules, parallelism, timeouts **TBD**); **flaky** jobs are triaged as **quality** defects.
 
 **Out of scope for v1 NFR sections:** **Scalability** (hyperscale multi-tenant growth) and **product UI accessibility**—revisit if the surface expands beyond **docs** and **CLI**.
